@@ -19,10 +19,21 @@ def SelectAllTable(conn, cur, Table):
     for row in rows:
         print(row)
 
-def main():
+def InsertIntoTable(conn, cur, Table, Values):
+    JobDesc = Values["Job Description"]
+    Company = Values["Company Name"]
+    City = Values["Location"]
+    Link = Values["Apply Link"]
+    cur.execute(f"INSERT INTO public.{Table} (Company, JobDesc, City, Link) 
+                VALUES ({JobDesc}, {Company}, {City}, {Link});")
+    conn.commit()
+    cur.close()
+    conn.close()
+    
+def InsertTOTableMain(Values):
     conn = connectionTODB()
     cur = conn.cursor()
-    SelectAllTable(conn, cur, "jobsfromtelegram")
+    table = "jobsfromtelegram"
+    InsertIntoTable(conn, cur, table, Values)
+    #SelectAllTable(conn, cur, "jobsfromtelegram")
 
-if __name__ == '__main__':
-    main()
