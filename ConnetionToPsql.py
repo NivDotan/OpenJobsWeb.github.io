@@ -20,12 +20,7 @@ def SelectAllTable(conn, cur, Table):
         print(row)
 
 def InsertIntoTable(conn, cur, Table, Values):
-    JobDesc = Values["Job Description"]
-    Company = Values["Company Name"]
-    City = Values["Location"]
-    Link = Values["Apply Link"]
-    cur.execute(f"INSERT INTO public.{Table} (Company, JobDesc, City, Link) 
-                VALUES ({JobDesc}, {Company}, {City}, {Link});")
+    cur.execute(f"INSERT INTO public.{Table} (Company, JobDesc, City, Date, Link) VALUES ( {Values["Job Description"]}, {Values["Company Name"]}, {Values["Location"]}, {Values["Date"].strftime("%Y-%m-%d")}, {Values["Link"]});")
     conn.commit()
     cur.close()
     conn.close()
@@ -37,3 +32,5 @@ def InsertTOTableMain(Values):
     InsertIntoTable(conn, cur, table, Values)
     #SelectAllTable(conn, cur, "jobsfromtelegram")
 
+#{'Date': datetime.datetime(2024, 2, 18, 0, 0), 'Job Description': 'Student Software Engineer', 'Company Name': 'Genesys', 
+#    'Location': 'Tel Aviv, Israel', 'Link': 'https://genesys.wd1.myworkdayjobs.com/Genesys/job/Tel-Aviv-Israel/Student-Software-Engineer_JR103659'}
