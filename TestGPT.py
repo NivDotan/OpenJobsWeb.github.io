@@ -1,38 +1,9 @@
 from telethon import TelegramClient, events
-import re
-from datetime import datetime
-from ConnetionToPsql import InsertTOTableMain
+import datetime
+from ConnetionToPsql import insert_into_jobs_table
+from MessageParser import parse_message
 from telethon.tl.types import Message, PeerChannel, MessageMediaWebPage, WebPagePending, MessageEntityBold, MessageEntityTextUrl, MessageEntityHashtag
 from telethon.tl import types
-
-def parse_message(event):
-    
-    MessageMediaWebPage = event.media.webpage
-    lines = event.message.split('\n')
-
-    # Extract information
-    if len(lines) >= 2:
-        job_description = lines[0].strip()
-
-        # Extracting company name from the job description line
-        company_name = job_description.split(' at ', 1)[1].strip()
-
-        location_line = lines[1].strip()
-
-        # Extracting location from the location line
-        location_prefix = 'Location: '
-        if location_line.startswith(location_prefix):
-            location = location_line[len(location_prefix):].strip()
-        else:
-            location = None
-
-    return {
-        'Job Description': job_description,
-        'Company Name': company_name,
-        'Location': location,
-        'Link': MessageMediaWebPage.url,
-        'Date': event.date
-    }
 
 async def Connection(api_id, api_hash):
     client = TelegramClient('Test1', api_id, api_hash)
@@ -49,11 +20,9 @@ async def main():
         async def my_event_handler(event):
             print(event.raw_text)
             print(event.message)
-            print(parse_message(event.message))
-            TmpStr = str(event.message)
-            parse_message(TmpStr)
-            DictionaryOfValues = parse_message(TmpStr)
-            InsertTOTableMain(DictionaryOfValues)
+            DictionaryOfValues = parse_message(event.message)
+            print(DictionaryOfValues)
+            insert_into_jobs_table(values = DictionaryOfValues)
     except:
         print("Had An Error")
 

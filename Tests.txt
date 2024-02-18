@@ -1,0 +1,143 @@
+Payment Implementation Specialist at Papaya Global
+Location: Herzliya
+Press here to apply
+
+מהנדס/ת הנעה - רילוקיישן at Aeronautics
+Location: אירונאוטיקס
+Press here to apply
+
+Growth Product Manager at Artlist
+Location: TLV
+Press here to apply
+
+Supply Retention Rep at Gett
+Location: Tel Aviv, Israel
+Press here to apply
+
+Android Developer at GoTech
+Location: Haifa
+Press here to apply
+
+Business Applications Analyst - Temporary Student Position at Justt
+Location: Justt Israel
+Press here to apply
+#StudentPositions
+
+Technical Artist - 88 Fortunes at SciPlay
+Location: Israel
+Press here to apply
+
+Senior Infrastructure Developer at VAST Data
+Location: Israel - Haifa
+Press here to apply
+
+Booking Representative_CS at ZIM
+Location: IL-Haifa
+Press here to apply
+
+Quality Complaints Specialist at INSIGHTEC
+Location: Haifa, Israel
+Press here to apply
+
+SMB Account Manager at JFrog
+Location: tel aviv
+Press here to apply
+
+Executive Assistant at Yotpo
+Location: Tel Aviv
+Press here to apply
+
+Compiler Engineering Student for Deep Learning at Mobileye
+Location: Haifa, Israel
+Press here to apply
+#StudentPositions
+
+Data Manager at Mobileye
+Location: Jerusalem, Israel
+Press here to apply
+
+Safety Critical Linux architect at Mobileye
+Location: Haifa, Israel
+Press here to apply
+
+SW Student at Applied Materials
+Location: Rehovot,ISR
+Press here to apply
+#StudentPositions
+
+Sr Full Stack Developer (Prisma CAS) at Palo Alto Networks
+Location: Tel Aviv-Yafo
+Press here to apply
+
+Admin Student at Intel
+Location: Jerusalem, Jerusalem
+Press here to apply
+#StudentPositions
+
+Student for CI and SW Automation Engineer at Intel
+Location: Haifa, Haifa District
+Press here to apply
+#StudentPositions
+
+Product Development Engineer at Intel
+Location: Haifa, Haifa District
+Press here to apply
+
+Senior Technical Program Manager - Microsoft Defender for Cloud Apps at Microsoft
+Location: Multiple Locations, Multiple Locations, Israel
+Send your CV + the link below to our admin who works there t.me/abaaabb ✌🏻 or press here to apply on your own
+
+# Senior Product Manager - Microsoft Threat Protection at Microsoft
+Location: Beer-Sheva, Southern, Israel. Haifa, Haifa, Israel. Herzliya, Tel Aviv, Israel. Nazareth, Northern, Israel. Tel Aviv, Tel Aviv, Israel
+Send your CV + the link below to our admin who works there t.me/abaaabb ✌🏻 or press here to apply on your own
+
+
+
+Technical Recruiter at GoTech
+Location: Netanya
+Press here to apply
+Message(id=77475, peer_id=PeerChannel(channel_id=1281025780), date=datetime.datetime(2024, 2, 18, 12, 0, 1, tzinfo=datetime.timezone.utc), message='Technical Recruiter at GoTech\nLocation: Netanya\nPress here to apply', out=False, mentioned=False, media_unread=False, silent=True, post=True, from_scheduled=False, legacy=False, edit_hide=False, pinned=False, noforwards=False, invert_media=False, from_id=None, saved_peer_id=None, fwd_from=None, via_bot_id=None, reply_to=None, media=MessageMediaWebPage(webpage=WebPage(id=4055979630559944892, url='https://gotech.io/careers/', display_url='gotech.io/careers', hash=0, has_large_media=False, type='photo', site_name='gotech.io', title='GoTech | Tech as a Service', description='GoTech is a one-stop shop for infrastructures and development services.', photo=Photo(id=5952984591524539920, access_hash=-4396876523317340480, file_reference=b'\x00e\xd1\xf1A]\xcb[\xb8\xddU\xe3\xd8&\x1dV\xc7una"', date=datetime.datetime(2022, 4, 10, 11, 55, 13, tzinfo=datetime.timezone.utc), sizes=[PhotoStrippedSize(type='i', bytes=b'\x01\x0c(\xd4bL\xa0\x01\xc1\x1fz\xa2\x91\xe4\x11F\xc4\x95\xe7\xe6\xc6\x01\xef\xebRl\x0b\xcf=}x\xa5\x98\x90\xa3\x1e\xb4\x96\xc0\xe3mQP\x1b\x89 \xea\xe5\x9d=\x00\x1fw\xf9\xe6\x9e\r\xceN\xd2\xfd>M\xe0s\xc7\x7f\xc6\xa6\xf3\x1bk\x1c\xf7\xc5+H\xc1s\x9e\xf8\xfd)\x81\x03,\xa7\xe7\x8c\xc9\xb8!\xc6\xe02NG\x14T\xa6W\x1d\xe8\xa0\x0f'), PhotoSize(type='m', w=320, h=100, size=9822), PhotoSizeProgressive(type='x', w=431, h=135, sizes=[1199, 3241, 6626, 9034, 13304])], dc_id=4, has_stickers=False, video_sizes=[]), embed_url=None, embed_type=None, embed_width=None, embed_height=None, duration=None, author=None, document=None, cached_page=None, attributes=[]), force_large_media=False, force_small_media=False, manual=False, safe=False), reply_markup=None, entities=[MessageEntityBold(offset=0, length=19), MessageEntityTextUrl(offset=54, length=4, url='https://gotech.io/careers/')], views=1, forwards=0, replies=None, edit_date=None, post_author=None, grouped_id=None, reactions=None, restriction_reason=[], ttl_period=None)
+Threat Hunting Expert at Hunters
+Location: Israel
+Press here to apply
+
+Message(id=77476, peer_id=PeerChannel(channel_id=1281025780), date=datetime.datetime(2024, 2, 18, 12, 0, 2, tzinfo=datetime.timezone.utc), message='Threat Hunting Expert at Hunters\nLocation: Israel\nPress here to apply', out=False, mentioned=False, media_unread=False, silent=True, post=True, from_scheduled=False, legacy=False, edit_hide=False, pinned=False, noforwards=False, invert_media=False, from_id=None, saved_peer_id=None, fwd_from=None, via_bot_id=None, reply_to=None, media=MessageMediaWebPage(webpage=WebPagePending(id=2947580909749278959, date=datetime.datetime(2024, 2, 18, 12, 2, 2, tzinfo=datetime.timezone.utc), url='https://www.comeet.com/jobs/hunters/67.007/threat-hunting-expert/85.34E'), force_large_media=False, force_small_media=False, manual=False, safe=False), reply_markup=None, entities=[MessageEntityBold(offset=0, length=21), MessageEntityTextUrl(offset=56, length=4, url='https://www.comeet.com/jobs/hunters/67.007/threat-hunting-expert/85.34E')], views=1, forwards=0, 
+replies=None, edit_date=None, post_author=None, grouped_id=None, reactions=None, restriction_reason=[], ttl_period=None)
+Team8-VC Analyst at Team8
+Location: Tel Aviv, Israel
+Press here to apply
+Message(id=77477, peer_id=PeerChannel(channel_id=1281025780), date=datetime.datetime(2024, 2, 18, 12, 0, 5, tzinfo=datetime.timezone.utc), message='Team8-VC Analyst at Team8\nLocation: Tel Aviv, Israel\nPress here to apply', out=False, mentioned=False, media_unread=False, silent=True, post=True, from_scheduled=False, legacy=False, edit_hide=False, pinned=False, noforwards=False, invert_media=False, from_id=None, saved_peer_id=None, fwd_from=None, via_bot_id=None, reply_to=None, media=MessageMediaWebPage(webpage=WebPagePending(id=2947580909557336709, date=datetime.datetime(2024, 2, 18, 12, 2, 5, tzinfo=datetime.timezone.utc), url='https://www.comeet.com/jobs/team8/61.003/team8-vc-analyst/93.341'), force_large_media=False, force_small_media=False, manual=False, safe=False), reply_markup=None, entities=[MessageEntityBold(offset=0, length=16), MessageEntityTextUrl(offset=59, length=4, url='https://www.comeet.com/jobs/team8/61.003/team8-vc-analyst/93.341')], views=1, forwards=0, replies=None, edit_date=None, post_author=None, grouped_id=None, reactions=None, restriction_reason=[], ttl_period=None)
+
+Israel Total Rewards Manager at Payoneer
+Location: Petach Tiqva, Israel
+Press here to apply
+Message(id=77478, peer_id=PeerChannel(channel_id=1281025780), date=datetime.datetime(2024, 2, 18, 12, 0, 7, tzinfo=datetime.timezone.utc), message='Israel Total Rewards Manager at Payoneer\nLocation: 
+Petach Tiqva, Israel\nPress here to apply', out=False, mentioned=False, media_unread=False, silent=True, post=True, from_scheduled=False, legacy=False, edit_hide=False, pinned=False, noforwards=False, invert_media=False, from_id=None, saved_peer_id=None, fwd_from=None, via_bot_id=None, reply_to=None, media=MessageMediaWebPage(webpage=WebPagePending(id=1753139547672617245, date=datetime.datetime(2024, 2, 18, 12, 2, 7, tzinfo=datetime.timezone.utc), url='https://www.payoneer.com/careers/position/5702637/?gh_jid=5702637'), force_large_media=False, force_small_media=False, manual=False, safe=False), reply_markup=None, entities=[MessageEntityBold(offset=0, length=28), MessageEntityTextUrl(offset=78, length=4, url='https://www.payoneer.com/careers/position/5702637/?gh_jid=5702637')], views=1, forwards=0, replies=None, edit_date=None, post_author=None, grouped_id=None, reactions=None, restriction_reason=[], ttl_period=None)
+
+HR Generalist at Resident
+Location: Tel Aviv
+Press here to apply
+Message(id=77479, peer_id=PeerChannel(channel_id=1281025780), date=datetime.datetime(2024, 2, 18, 12, 0, 8, tzinfo=datetime.timezone.utc), message='HR Generalist at Resident\nLocation: Tel Aviv\nPress here to apply', out=False, mentioned=False, media_unread=False, silent=True, post=True, from_scheduled=False, legacy=False, edit_hide=False, pinned=False, noforwards=False, invert_media=False, from_id=None, saved_peer_id=None, fwd_from=None, via_bot_id=None, reply_to=None, media=MessageMediaWebPage(webpage=WebPagePending(id=3221565235760117290, date=datetime.datetime(2024, 2, 18, 12, 2, 8, tzinfo=datetime.timezone.utc), url='https://boards.greenhouse.io/residenthome/jobs/5086643004'), force_large_media=False, force_small_media=False, manual=False, safe=False), reply_markup=None, entities=[MessageEntityBold(offset=0, length=13), MessageEntityTextUrl(offset=51, length=4, url='https://boards.greenhouse.io/residenthome/jobs/5086643004')], views=1, forwards=0, replies=None, edit_date=None, post_author=None, grouped_id=None, reactions=None, restriction_reason=[], ttl_period=None)
+
+Customer Service Representative at Verifone
+Location: Israel
+Press here to apply
+Message(id=77480, peer_id=PeerChannel(channel_id=1281025780), date=datetime.datetime(2024, 2, 18, 12, 0, 9, tzinfo=datetime.timezone.utc), message='Customer Service Representative at Verifone\nLocation: Israel\nPress here to apply', out=False, mentioned=False, media_unread=False, silent=True, post=True, from_scheduled=False, legacy=False, edit_hide=False, pinned=False, noforwards=False, invert_media=False, from_id=None, saved_peer_id=None, fwd_from=None, via_bot_id=None, reply_to=None, media=MessageMediaWebPage(webpage=WebPagePending(id=7968910938528639984, date=datetime.datetime(2024, 2, 18, 
+12, 2, 8, tzinfo=datetime.timezone.utc), url='https://ats.comparably.com/api/v2/verifone/post/5807127003?gh_jid=5807127003'), force_large_media=False, force_small_media=False, manual=False, safe=False), reply_markup=None, entities=[MessageEntityBold(offset=0, length=31), MessageEntityTextUrl(offset=67, length=4, url='https://ats.comparably.com/api/v2/verifone/post/5807127003?gh_jid=5807127003')], 
+views=1, forwards=0, replies=None, edit_date=None, post_author=None, grouped_id=None, reactions=None, restriction_reason=[], ttl_period=None)
+
+Student Software Engineer at Genesys
+Location: Tel Aviv, Israel
+Press here to apply
+#StudentPositions
+Message(id=77481, peer_id=PeerChannel(channel_id=1281025780), date=datetime.datetime(2024, 2, 18, 12, 0, 10, tzinfo=datetime.timezone.utc), message='Student Software Engineer at Genesys\nLocation: Tel Aviv, Israel\nPress here to apply\n#StudentPositions', out=False, mentioned=False, media_unread=False, silent=True, post=True, from_scheduled=False, legacy=False, edit_hide=False, pinned=False, noforwards=False, invert_media=False, from_id=None, saved_peer_id=None, fwd_from=None, via_bot_id=None, reply_to=None, media=MessageMediaWebPage(webpage=WebPagePending(id=828568495621228423, date=datetime.datetime(2024, 2, 18, 12, 2, 10, tzinfo=datetime.timezone.utc), url='https://genesys.wd1.myworkdayjobs.com/Genesys/job/Tel-Aviv-Israel/Student-Software-Engineer_JR103659'), force_large_media=False, force_small_media=False, manual=False, safe=False), reply_markup=None, entities=[MessageEntityBold(offset=0, length=25), MessageEntityTextUrl(offset=70, length=4, url='https://genesys.wd1.myworkdayjobs.com/Genesys/job/Tel-Aviv-Israel/Student-Software-Engineer_JR103659'), MessageEntityHashtag(offset=84, length=17)], views=1, forwards=0, replies=None, edit_date=None, post_author=None, grouped_id=None, reactions=None, restriction_reason=[], ttl_period=None)
+
+Data Scientist at Nuvei
+Location: Israel Tel Aviv-Yafo
+Press here to apply
+Message(id=77482, peer_id=PeerChannel(channel_id=1281025780), date=datetime.datetime(2024, 2, 18, 12, 0, 12, tzinfo=datetime.timezone.utc), message='Data Scientist at Nuvei\nLocation: Israel Tel Aviv-Yafo\nPress here to apply', out=False, mentioned=False, media_unread=False, silent=True, post=True, from_scheduled=False, legacy=False, edit_hide=False, pinned=False, noforwards=False, invert_media=False, from_id=None, saved_peer_id=None, fwd_from=None, via_bot_id=None, reply_to=None, media=MessageMediaWebPage(webpage=WebPagePending(id=3254389603824222410, date=datetime.datetime(2024, 2, 18, 12, 2, 12, tzinfo=datetime.timezone.utc), url='https://apply.workable.com/nuvei/j/A2EBEDA277/'), force_large_media=False, force_small_media=False, manual=False, safe=False), reply_markup=None, entities=[MessageEntityBold(offset=0, length=14), MessageEntityTextUrl(offset=61, length=4, url='https://apply.workable.com/nuvei/j/A2EBEDA277/')], views=1, forwards=0, replies=None, edit_date=None, post_author=None, grouped_id=None, reactions=None, restriction_reason=[], ttl_period=None)
+
+File Systems Engineer at Apple
+Location: Haifa
+Press here to apply
+Message(id=77483, peer_id=PeerChannel(channel_id=1281025780), date=datetime.datetime(2024, 2, 18, 12, 0, 13, tzinfo=datetime.timezone.utc), message='File Systems Engineer at Apple\nLocation: Haifa\nPress here to apply', out=False, mentioned=False, media_unread=False, silent=True, post=True, from_scheduled=False, legacy=False, edit_hide=False, pinned=False, noforwards=False, invert_media=False, from_id=None, saved_peer_id=None, fwd_from=None, via_bot_id=None, reply_to=None, media=MessageMediaWebPage(webpage=WebPagePending(id=2493719960074899712, date=datetime.datetime(2024, 2, 18, 12, 2, 13, tzinfo=datetime.timezone.utc), url='https://jobs.apple.com/en-il/details/200539408'), force_large_media=False, force_small_media=False, manual=False, safe=False), reply_markup=None, entities=[MessageEntityBold(offset=0, length=21), MessageEntityTextUrl(offset=53, length=4, url='https://jobs.apple.com/en-il/details/200539408')], views=1, forwards=0, replies=None, edit_date=None, post_author=None, grouped_id=None, reactions=None, restriction_reason=[], ttl_period=None)

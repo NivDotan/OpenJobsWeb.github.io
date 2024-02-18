@@ -19,18 +19,47 @@ def SelectAllTable(conn, cur, Table):
     for row in rows:
         print(row)
 
-def InsertIntoTable(conn, cur, Table, Values):
-    cur.execute(f"INSERT INTO public.{Table} (Company, JobDesc, City, Date, Link) VALUES ( {Values["Job Description"]}, {Values["Company Name"]}, {Values["Location"]}, {Values["Date"].strftime("%Y-%m-%d")}, {Values["Link"]});")
-    conn.commit()
-    cur.close()
-    conn.close()
-    
-def InsertTOTableMain(Values):
+
+def insert_into_jobs_table(table_name= "jobsfromtelegram", values = None):
     conn = connectionTODB()
     cur = conn.cursor()
-    table = "jobsfromtelegram"
-    InsertIntoTable(conn, cur, table, Values)
-    #SelectAllTable(conn, cur, "jobsfromtelegram")
 
-#{'Date': datetime.datetime(2024, 2, 18, 0, 0), 'Job Description': 'Student Software Engineer', 'Company Name': 'Genesys', 
-#    'Location': 'Tel Aviv, Israel', 'Link': 'https://genesys.wd1.myworkdayjobs.com/Genesys/job/Tel-Aviv-Israel/Student-Software-Engineer_JR103659'}
+    try:
+        # Ensure values are properly formatted
+        company_name = values["Company Name"].replace("'", "''")  # Escape single quotes
+        job_desc = values["Job Description"].replace("'", "''")  
+        city = values["Location"].replace("'", "''")  
+        date_str = values["Date"].strftime('%Y-%m-%d')
+        link = values["Link"].replace("'", "''")  
+
+        # Insert query
+        query = f"""
+            INSERT INTO public.{table_name} ("Company", "JobDesc", "City", "Date", "Link")
+            VALUES ('{company_name}', '{job_desc}', '{city}', '{date_str}', '{link}')
+            RETURNING "jobsfromtelegram"."key";  -- Assuming 'id' is the name of the primary key column
+        """
+
+        # Execute the query
+        cur.execute(query)
+
+        # Get the inserted primary key
+        inserted_id = cur.fetchone()[0]
+
+        # Commit the transaction
+        conn.commit()
+
+        return inserted_id
+
+    except psycopg2.Error as e:
+        print(f"Error inserting into {table_name}: {e}")
+        conn.rollback()
+        raise
+
+    finally:
+        cur.close()
+
+
+def InsertTOTableMain(Values):
+    conn = connectionTODB()
+    table = "jobsfromtelegram"
+    insert_into_jobs_table(conn, table, Values)
