@@ -51,15 +51,20 @@ def parse_message(event):
 
 
 
+
 def parse_messages(message, today_date):
+    print(message)
     job_description_match = re.search(r'\*\*(.*?)\*\* at', message)
-    company_name_match = re.search(r'\*\*(.*?)\*\* at', message)
     location_match = re.search(r'Location: (.+?)\n', message)
     link_match = re.search(r'\[here\]\((.*?)\)', message)
 
-    if job_description_match and company_name_match and location_match and link_match:
+    if job_description_match and location_match and link_match:
         job_description = job_description_match.group(1).strip()
-        company_name = company_name_match.group(1).strip()
+        
+        # Extract company name separately
+        company_name_match = re.search(r'at (.+?)\n', message)
+        company_name = company_name_match.group(1).strip() if company_name_match else None
+
         location = location_match.group(1).strip()
         link = link_match.group(1).strip()
 
@@ -73,7 +78,6 @@ def parse_messages(message, today_date):
             'Location': location,
             'Date': today_date,
             'Link': link
-            
         }
     else:
         return None

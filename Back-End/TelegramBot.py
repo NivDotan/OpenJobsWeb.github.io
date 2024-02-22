@@ -1,7 +1,7 @@
 from telethon import TelegramClient, events
 from datetime import datetime
 from ConnetionToPsql import insert_into_jobs_table
-from MessageParser import parse_message,parse_messages
+from MessageParser import parse_messages
 from telethon.tl.types import Message, PeerChannel, MessageMediaWebPage, WebPagePending, MessageEntityBold, MessageEntityTextUrl, MessageEntityHashtag
 from telethon.tl import types
 import traceback
@@ -32,7 +32,7 @@ async def main():
             DictionaryOfValues = parse_messages(message.text, today)
             if not(DictionaryOfValues is None):
                 insert_into_jobs_table(values = DictionaryOfValues)
-
+                
 
     except Exception as e:
         print("Had An Error, ", e, ", ", traceback.print_exc())
