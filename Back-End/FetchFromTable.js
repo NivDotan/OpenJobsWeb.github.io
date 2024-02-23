@@ -52,6 +52,19 @@ app.get('/GetStudentJuniorTAAndHaifa', async (req, res) => {
     }
 });
 
+app.get('/DeleteAndContinue', async (req, res) => {
+    try {
+        const Tmp = await CopyAndDelete();
+        const tableName = 'jobsfromtelegram';
+        const rows = await selectAllFromTable(tableName);
+        res.setHeader('Content-Type', 'application/json');
+        res.json(rows);
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 
 function setupDBConnection() {
     const pool = new Pool({
@@ -144,6 +157,7 @@ async function GetStudentJuniorTAAndHaifa(tableName) {
                                 .orWhere('City', 'like', '%HQ%')
                                 .orWhere('City', 'like', '%IL%')
                                 .orWhere('City', 'like', 'Israel')
+                                .orWhere('City', 'like', '%Yokneam%')
                                 .orWhere('City', 'like', '%tel%');
                             });
                         });
@@ -162,3 +176,33 @@ async function GetStudentJuniorTAAndHaifa(tableName) {
         await knex.destroy();
     }
 }
+
+
+async function CopyAndDelete() {
+    const { knex } = setupDBConnection();
+    const tableName = 'jobsfromtelegram';
+    const oldTableName = 'OldJobPosting';
+    
+    try {
+        // Step 1: Copy data to the new table
+        const selectedRows = await knex
+                            .select('Company', 'JobDesc', 'City', 'Link', 'Date')
+                            .from(tableName);
+        const insertResult = await knex(oldTableName).insert(selectedRows);
+        const copiedRows = await knex.select('*').from(oldTableName);
+
+        const deleteResult = await knex(tableName).del();
+
+        // Return a message or any other information based on your needs
+        return {
+            success: true,
+            message: 'Data copied to OldJobPosting and deleted from jobsfromtelegram.',
+        };
+    } catch (error) {
+        console.error('Error executing query:', error);
+        throw error;
+    } finally {
+        await knex.destroy();
+    }
+}
+

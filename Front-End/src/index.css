@@ -6,16 +6,23 @@
   padding: 20px;
 }
 
-.filter-button {
-  color: white;
+.button-container {
+  display: flex;
+  gap: 10px; /* Adjust the gap between buttons as needed */
+  margin-bottom: 20px;
+}
+
+.filter-button,
+.delete-button {
+  color: green;
   border: none;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin-bottom: 20px;
   cursor: pointer;
+  background-color: rgba(107, 142, 35, 0.9);
 }
 
 html {

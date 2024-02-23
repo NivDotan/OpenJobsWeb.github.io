@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import FilterButton from './FilterButton';
-
+import DeleteButton from './DeleteAndCopyButton';
 
 const MyComponent = () => {
   const [data, setData] = useState([]);
@@ -32,9 +32,21 @@ const MyComponent = () => {
     }
   };
 
+  const handleDeleteButtonClick = async () => {
+    try {
+      const response = await axios.get('http://localhost:3001/DeleteAndContinue');
+      setFilteredData(response.data);
+    } catch (error) {
+      console.error('Error fetching filtered data:', error);
+    }
+  };
+
   return (
     <div className="modern-container">
-      <FilterButton  onClick={handleFilterButtonClick}/>
+      <div className="button-container">
+        <FilterButton onClick={handleFilterButtonClick} />
+        <DeleteButton onClick={handleDeleteButtonClick} />
+      </div>
     <div className="table-container">
       <Table className="">
         <Thead>
@@ -46,20 +58,26 @@ const MyComponent = () => {
             <Th>Link</Th>
           </Tr>
         </Thead>
-        <Tbody>
-          {(filteredData.length > 0 ? filteredData : data).map((item) => (
-            <Tr key={item.key}>
-              <Td>{item.Company}</Td>
-              <Td>{item.JobDesc}</Td>
-              <Td>{item.City}</Td>
-              <Td>{item.Date}</Td>
-              <Td>
-                <a href={item.Link} target="_blank" rel="noopener noreferrer">
-                  Link
-                </a>
-              </Td>
+          <Tbody>
+          {(filteredData.length > 0 ? filteredData : data).length > 0 ? (
+            (filteredData.length > 0 ? filteredData : data).map((item) => (
+              <Tr key={item.key}>
+                <Td>{item.Company}</Td>
+                <Td>{item.JobDesc}</Td>
+                <Td>{item.City}</Td>
+                <Td>{item.Date}</Td>
+                <Td>
+                  <a href={item.Link} target="_blank" rel="noopener noreferrer">
+                    Link
+                  </a>
+                </Td>
+              </Tr>
+            ))
+          ) : (
+            <Tr>
+              <Td colSpan="5">No data available</Td>
             </Tr>
-          ))}
+          )}
         </Tbody>
       </Table>
     </div>
