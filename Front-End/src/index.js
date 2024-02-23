@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

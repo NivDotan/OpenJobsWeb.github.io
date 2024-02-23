@@ -3,13 +3,14 @@ import axios from 'axios';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 
-function App(){
+
+const MyComponent = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3001'); // Replace with your server URL
+        const response = await axios.get('http://localhost:3001');
         setData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -21,7 +22,7 @@ function App(){
 
   return (
     <div className="table-container">
-    <Table class = "responsiveTable">
+      <Table className="responsiveTable">
         <Thead>
           <Tr>
             <Th>Company</Th>
@@ -47,6 +48,26 @@ function App(){
           ))}
         </Tbody>
       </Table>
+    </div>
+  );
+};
+
+const FilterWindow = () => {
+  // Add your filter logic and UI here
+
+  return (
+    <div className="filter-window">
+      {/* Filter UI elements go here */}
+      <p>Filter Window</p>
+    </div>
+  );
+};
+
+const App = () => {
+  return (
+    <div className="app-container">
+      <FilterWindow />
+      <MyComponent />
     </div>
   );
 };

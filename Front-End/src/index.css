@@ -1,13 +1,108 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+html {
+  min-height: 100%;
+  background: #6fa0c9
+}
+
+a {
+  color: #000
+}
+
+a:hover {
+  background: hsla(0,0%,100%,.7)
+}
+
+h1 {
+  font-size: 2.5em
+}
+
+h2 {
+  border-bottom: 3px solid #000
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  background: hsla(0,0%,100%,.4);
+  color: #000;
+  word-wrap: break-word
+}
+
+ol li,ul li {
+  line-height: 140%
+}
+
+table {
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+  border-collapse: collapse;
+  background: hsla(0,0%,100%,.4)
+}
+
+td,th {
+  border: 1px solid #000;
+  padding: .75rem;
+  text-align: left
+}
+
+th {
+  font-weight: 700;
+  white-space: nowrap;
+  background: #000;
+  color: #fff
+}
+
+tr:first-of-type th:not(:last-child) {
+  border-right-color: transparent
+}
+
+tr:first-child th:first-child,tr:not(:first-child):not(:last-child) th {
+  border-bottom-color: transparent!important
+}
+
+.responsiveTable {
+  max-width: 900px; /* Adjust the max-width to your preference */
+  margin: 0 auto; /* Center the table within its container */
+  width: 100%;
+  max-height: 100px; /* Adjust the max-height to your preference */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.responsiveTable td .tdBefore {
+  display: none
+}
+
+@media screen and (max-width: 40em) {
+  .responsiveTable table,.responsiveTable tbody,.responsiveTable td,.responsiveTable th,.responsiveTable thead,.responsiveTable tr {
+      display:block
+  }
+
+  .responsiveTable thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+      border-bottom: 2px solid #333
+  }
+
+  .responsiveTable tbody tr {
+      border: 1px solid #000;
+      padding: .25em
+  }
+
+  .responsiveTable td.pivoted {
+      border: none!important;
+      position: relative;
+      padding-left: calc(50% + 10px)!important
+  }
+
+  .responsiveTable td .tdBefore,.responsiveTable td.pivoted {
+      text-align: left!important;
+      white-space: pre-wrap;
+      overflow-wrap: break-word
+  }
+
+  .responsiveTable td .tdBefore {
+      position: absolute;
+      display: block;
+      left: 1rem;
+      width: calc(50% - 20px);
+      font-weight: 600
+  }
 }
