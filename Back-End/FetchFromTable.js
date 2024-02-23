@@ -59,7 +59,16 @@ async function selectAllFromTable(tableName) {
 
     try {
         const result = await knex.select('*').from(tableName);
-        return result;
+
+        // Convert date format in each row
+        const formattedRows = result.map(row => {
+            return {
+                ...row,
+                Date: convertDateFormat(row.Date),
+            };
+        });
+
+        return formattedRows;
     } catch (error) {
         console.error('Error executing query:', error);
         throw error;
@@ -67,3 +76,12 @@ async function selectAllFromTable(tableName) {
         await knex.destroy();
     }
 }
+
+
+function convertDateFormat(originalDate) {
+    const date = new Date(originalDate);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear().toString().slice(2);
+    return `${day}/${month}/${year}`;
+  }

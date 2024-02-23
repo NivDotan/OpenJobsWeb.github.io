@@ -1,16 +1,3 @@
-//import './App.css';
-import MyComponent from './GetFromServer';
-import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
-/*
-function App() {
-  return (
-    <div>
-      <MyComponent />
-    </div>
-  );
-}
-
-export default App;*/
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';

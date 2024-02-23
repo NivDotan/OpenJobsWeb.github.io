@@ -53,7 +53,7 @@ def parse_message(event):
 
 
 def parse_messages(message, today_date):
-    print(message)
+
     job_description_match = re.search(r'\*\*(.*?)\*\* at', message)
     location_match = re.search(r'Location: (.+?)\n', message)
     link_match = re.search(r'\[here\]\((.*?)\)', message)

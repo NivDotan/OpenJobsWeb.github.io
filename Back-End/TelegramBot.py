@@ -20,19 +20,19 @@ async def main():
         print("Client connected.")
         
         today = datetime.now().date()
+        start_date = datetime(2024, 2, 18).date()
         # Get messages from the last 24 hours
         messages = []
         async for message in client.iter_messages(channel_username, limit=None):
-            if message.date.date() == today:
+            if start_date <= message.date.date() <= today:
                 messages.append(message)
-            elif message.date.date() < today:
+            elif message.date.date() < start_date:
                 break
-        
+
         for message in messages:
             DictionaryOfValues = parse_messages(message.text, today)
             if not(DictionaryOfValues is None):
                 insert_into_jobs_table(values = DictionaryOfValues)
-                
 
     except Exception as e:
         print("Had An Error, ", e, ", ", traceback.print_exc())

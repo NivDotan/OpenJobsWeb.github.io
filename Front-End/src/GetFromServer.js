@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
-import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+//import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 
 const MyComponent = () => {
   const [data, setData] = useState([]);
@@ -21,7 +21,7 @@ const MyComponent = () => {
 
   return (
     <div className="table-container">
-    <Table class = "responsiveTable">
+    <Table className ="responsiveTable">
         <Thead>
           <Tr>
             <Th>Company</Th>
