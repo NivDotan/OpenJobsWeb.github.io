@@ -2,15 +2,18 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
+import FilterButton from './FilterButton';
 
 
 const MyComponent = () => {
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get('http://localhost:3001');
+        
         setData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -18,11 +21,22 @@ const MyComponent = () => {
     };
 
     fetchData();
-  }, []);
+  }, []); // Run only once on component mount
+
+  const handleFilterButtonClick = async () => {
+    try {
+      const response = await axios.get('http://localhost:3001/GetStudentJuniorTAAndHaifa');
+      setFilteredData(response.data);
+    } catch (error) {
+      console.error('Error fetching filtered data:', error);
+    }
+  };
 
   return (
+    <div className="modern-container">
+      <FilterButton  onClick={handleFilterButtonClick}/>
     <div className="table-container">
-      <Table className="responsiveTable">
+      <Table className="">
         <Thead>
           <Tr>
             <Th>Company</Th>
@@ -33,7 +47,7 @@ const MyComponent = () => {
           </Tr>
         </Thead>
         <Tbody>
-          {data.map((item) => (
+          {(filteredData.length > 0 ? filteredData : data).map((item) => (
             <Tr key={item.key}>
               <Td>{item.Company}</Td>
               <Td>{item.JobDesc}</Td>
@@ -49,16 +63,6 @@ const MyComponent = () => {
         </Tbody>
       </Table>
     </div>
-  );
-};
-
-const FilterWindow = () => {
-  // Add your filter logic and UI here
-
-  return (
-    <div className="filter-window">
-      {/* Filter UI elements go here */}
-      <p>Filter Window</p>
     </div>
   );
 };
@@ -66,7 +70,6 @@ const FilterWindow = () => {
 const App = () => {
   return (
     <div className="app-container">
-      <FilterWindow />
       <MyComponent />
     </div>
   );
