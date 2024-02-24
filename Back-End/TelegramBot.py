@@ -20,13 +20,13 @@ async def main():
         print("Client connected.")
         
         today = datetime.now().date()
-        start_date = datetime(2024, 2, 18).date()
+        #start_date = datetime(2024, 2, 18).date()
         # Get messages from the last 24 hours
         messages = []
         async for message in client.iter_messages(channel_username, limit=None):
-            if start_date <= message.date.date() <= today:
+            if message.date.date() == today:
                 messages.append(message)
-            elif message.date.date() < start_date:
+            elif message.date.date() < today:
                 break
 
         for message in messages:
