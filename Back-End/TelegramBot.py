@@ -20,7 +20,8 @@ async def main():
         print("Client connected.")
         
         today = datetime.now().date()
-        #start_date = datetime(2024, 2, 18).date()
+        yesterday_date = datetime(2024, 2, 27).date()
+        today = yesterday_date
         # Get messages from the last 24 hours
         messages = []
         async for message in client.iter_messages(channel_username, limit=None):
@@ -39,7 +40,7 @@ async def main():
 
 
     # Run the client until it's disconnected
-    await client.run_until_disconnected()
+    #await client.run_until_disconnected()
 
 if __name__ == '__main__':
     import asyncio
