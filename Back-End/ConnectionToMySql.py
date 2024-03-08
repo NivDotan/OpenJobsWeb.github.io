@@ -6,7 +6,7 @@ def connectionTODB():
         conn = mysql.connector.connect(
             user="if0_36071616",
             password="knhmgHmWz6o",
-            host="sql305.infinityfree.com",
+            host='185.27.134.202',
             database="if0_36071616_jobseekingdb", 
             port = 3306
         )

@@ -1,28 +1,24 @@
 import psycopg2
-
+import supabase
+from dotenv import load_dotenv
 #https://www.datacamp.com/tutorial/tutorial-postgresql-pythonv
-
-
+#https://stackoverflow.com/questions/40216311/reading-in-environment-variables-from-an-environment-file
+#https://stackoverflow.com/questions/41546883/what-is-the-use-of-python-dotenv
 def connectionTODB():
-    conn = psycopg2.connect(database = "JobSeekingDB", 
-                        user = "postgres", 
-                        host= 'localhost',
-                        password = "1399",
-                        port = 5432)
+    supabase_url = "https://opnfoozwkdnolacljfbo.supabase.co"
+    supabase_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9wbmZvb3p3a2Rub2xhY2xqZmJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk1NjUzNjUsImV4cCI6MjAyNTE0MTM2NX0.D7pAw1ZVlZ9bkC_16HSHkrL5MinsPHPFTaaj9uV1cwI"
+    conn = supabase.create_client(supabase_url, supabase_key)
     return conn
 
-def SelectAllTable(conn, cur, Table):
-    cur.execute(f"SELECT * FROM public.{Table};")
-    rows = cur.fetchall()
-    conn.commit()
-    conn.close()
-    for row in rows:
+def SelectAllTable(conn, Table):
+    response = conn.table(Table).select("*").execute()
+    print(response)
+    for row in response:
         print(row)
 
 
-def insert_into_jobs_table(table_name= "jobsfromtelegram", values = None):
-    conn = connectionTODB()
-    cur = conn.cursor()
+def insert_into_jobs_table(conn, table_name="jobsfromtelegram", values=None):
+    supabase_client = conn
 
     try:
         # Ensure values are properly formatted
@@ -31,35 +27,26 @@ def insert_into_jobs_table(table_name= "jobsfromtelegram", values = None):
         city = values["Location"].replace("'", "''")  
         date_str = values["Date"].strftime('%Y-%m-%d')
         link = values["Link"].replace("'", "''")  
-
-        # Insert query
-        query = f"""
-            INSERT INTO public.{table_name} ("Company", "JobDesc", "City", "Date", "Link")
-            VALUES ('{company_name}', '{job_desc}', '{city}', '{date_str}', '{link}')
-            RETURNING "jobsfromtelegram"."key";  -- Assuming 'id' is the name of the primary key column
-        """
-
-        # Execute the query
-        cur.execute(query)
-
+        
+        # Insert data into the Supabase table
+        response = supabase_client.table(table_name).upsert([{
+            "Company": company_name,
+            "JobDesc": job_desc,
+            "City": city,
+            "Date": date_str,
+            "Link": link
+        }]).execute()
+       
         # Get the inserted primary key
-        inserted_id = cur.fetchone()[0]
+        #inserted_id = response.data[0]["jobsfromtelegram"]["key"]
 
-        # Commit the transaction
-        conn.commit()
+        #return inserted_id
 
-        return inserted_id
-
-    except psycopg2.Error as e:
+    except Exception as e:
         print(f"Error inserting into {table_name}: {e}")
-        conn.rollback()
         raise
 
-    finally:
-        cur.close()
-
-
-def InsertTOTableMain(Values):
-    conn = connectionTODB()
+def InsertTOTableMain(conn, Values):
+    #conn = connectionTODB()
     table = "jobsfromtelegram"
     insert_into_jobs_table(conn, table, Values)

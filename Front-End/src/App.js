@@ -4,17 +4,25 @@ import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import FilterButton from './FilterButton';
 import DeleteButton from './DeleteAndCopyButton';
+import {selectAllFromTable, GetStudentJuniorTAAndHaifaJSON} from './ServerFunctions.js'
+const { createClient } = require('@supabase/supabase-js')
 
 const MyComponent = () => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  const supabase = createClient('https://opnfoozwkdnolacljfbo.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9wbmZvb3p3a2Rub2xhY2xqZmJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk1NjUzNjUsImV4cCI6MjAyNTE0MTM2NX0.D7pAw1ZVlZ9bkC_16HSHkrL5MinsPHPFTaaj9uV1cwI')
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3001');
+        //const response = await axios.get('http://localhost:3001');
+        //const { data, error } = await supabase.from('jobsfromtelegram').select('*');
+        //const{data,error} = await selectAllFromTable();
+        //setData(response.data);
         
-        setData(response.data);
+        const data1 = await selectAllFromTable();
+        //console.log(data1);
+        setData(data1);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -25,8 +33,11 @@ const MyComponent = () => {
 
   const handleFilterButtonClick = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/GetStudentJuniorTAAndHaifa');
-      setFilteredData(response.data);
+      //const response = await axios.get('http://localhost:3001/GetStudentJuniorTAAndHaifa');
+      const response = await GetStudentJuniorTAAndHaifaJSON();
+      //setFilteredData(response.data);
+      console.log(response);
+      //setData(response);
     } catch (error) {
       console.error('Error fetching filtered data:', error);
     }

@@ -3,12 +3,14 @@ const knex = require('knex');
 const express = require('express');
 const cors = require('cors');
 
+
 const app = express();
 const port = 3001;
 
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(cors())
+
 app.get('/', async (req, res) => {
     try {
         const tableName = 'jobsfromtelegram';
@@ -16,6 +18,10 @@ app.get('/', async (req, res) => {
         //console.log(rows);
         res.setHeader('Content-Type', 'application/json');
         res.json(rows);
+        const {data, error} = await supabase
+            .from('jobsfromtelegram')
+            .select('*');
+        console.log(data)
     } catch (error) {
         console.error('Error:', error);
         res.status(500).send('Internal Server Error');
