@@ -146,11 +146,98 @@ export async function CopyAndDelete() {
 
 export async function GetStudentJuniorTAAndHaifaJSON() {
     try {
+        const CheckIfExistTheTable = await getAllPathsAndCheckTableExistence();
+        
         const tableName = 'jobsfromtelegram';
         const rows = await GetStudentJuniorTAAndHaifa(tableName);
         return rows;
     } catch (error) {
         console.error('Error:', error);
         //res.status(500).send('Internal Server Error');
+    }
+}
+
+
+
+
+async function checkAndCreateTable() {
+    // Check if the table exists
+    const tableName = "TmpFilterTable";
+    const { data: tableExists, error } = await supabase
+        .select ('has_table','TmpFilterTable');
+    if (error) {
+        console.error('Error checking table existence:', error);
+        throw error;
+    }
+
+    if (tableExists) {
+        // Table exists, delete it
+        const { data: deleteResult, error: deleteError } = await supabase
+            .rpc('delete_table', { table_name: tableName });
+
+        if (deleteError) {
+            console.error('Error deleting table:', deleteError);
+            throw deleteError;
+        }
+
+        console.log('Table deleted:', deleteResult);
+
+        // Create a new table
+        const { data: createResult, error: createError } = await supabase
+            .rpc('create_table', { table_name: tableName });
+
+        if (createError) {
+            console.error('Error creating table:', createError);
+            throw createError;
+        }
+
+        console.log('Table created:', createResult);
+    } else {
+        // Table doesn't exist, create it
+        const { data: createResult, error: createError } = await supabase
+            .rpc('create_table', { table_name: tableName });
+
+        if (createError) {
+            console.error('Error creating table:', createError);
+            throw createError;
+        }
+
+        console.log('Table created:', createResult);
+    }
+}
+
+
+
+async function getAllPathsAndCheckTableExistence() {
+    try {
+        const { data, error } = await supabase
+            .from('')
+            .select('paths');
+
+        if (error) {
+            console.log('Error fetching paths:', error);
+            return [];
+        }
+
+        const paths = data.paths;
+
+        if (paths) {
+            console.log('All Paths:');
+            Object.keys(paths).forEach(path => {
+                console.log(`- ${path}`);
+            });
+
+            // Check if the table "TmpJobs" exists
+            const tableExists = paths['/TmpJobs'] !== undefined;
+            console.log(`Table "TmpJobs" exists: ${tableExists}`);
+            return tableExists;
+            //return Object.keys(paths);
+        } else {
+            console.log('No paths found.');
+            return [];
+        }
+    } catch (error) {
+        console.log('Unexpected error:', error);
+        return [];
     }
 }
