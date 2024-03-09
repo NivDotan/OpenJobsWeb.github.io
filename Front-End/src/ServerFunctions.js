@@ -1,6 +1,10 @@
 import { createClient } from '@supabase/supabase-js';
-
-// Initialize Supabase client
+//import {supabaseUrlFunction, supabaseKeyFunction} from './Open-Jobs-Web/Back-End/APIFunctionForENV.js';
+//const apiFunctions = require('/Open-Jobs-Web/Back-End/APIFunctionForENV');
+//
+////Initialize Supabase client
+//console.log(apiFunctions.supabaseUrlFunction())
+//console.log(apiFunctions.supabaseKeyFunction())
 const supabaseUrl = "https://opnfoozwkdnolacljfbo.supabase.co";
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9wbmZvb3p3a2Rub2xhY2xqZmJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk1NjUzNjUsImV4cCI6MjAyNTE0MTM2NX0.D7pAw1ZVlZ9bkC_16HSHkrL5MinsPHPFTaaj9uV1cwI";
 const supabase = createClient(supabaseUrl, supabaseKey);
@@ -122,7 +126,8 @@ export async function CopyAndDelete() {
         // Step 2: Delete data from the original table
         const { data: deleteResult, error: deleteError } = await supabase
             .from(tableName)
-            .delete();
+            .delete()
+            .neq('City', '');
 
         if (deleteError) {
             console.error('Error deleting data from jobsfromtelegram:', deleteError);
@@ -146,15 +151,6 @@ export async function GetStudentJuniorTAAndHaifaJSON() {
         const CheckIfExistTheTable = await getAllPathsAndCheckTableExistence();
         const tableName = 'jobsfromtelegram';
         const rows = await GetStudentJuniorTAAndHaifa(tableName);
-        //Delete the table and create a new table
-        //if (CheckIfExistTheTable){
-        //    recreateTable();
-        //}
-        ////Only create a new table
-        //else{
-        //    CreateTable2();
-        //}
-        
         return rows;
     } catch (error) {
         console.error('Error:', error);
@@ -163,53 +159,6 @@ export async function GetStudentJuniorTAAndHaifaJSON() {
 }
 
 
-
-
-async function checkAndCreateTable() {
-    // Check if the table exists
-    const tableName = "TmpFilterTable";
-    const { data: tableExists, error } = await supabase
-        .select ('has_table','TmpFilterTable');
-    if (error) {
-        console.error('Error checking table existence:', error);
-        throw error;
-    }
-
-    if (tableExists) {
-        // Table exists, delete it
-        const { data: deleteResult, error: deleteError } = await supabase
-            .rpc('delete_table', { table_name: tableName });
-
-        if (deleteError) {
-            console.error('Error deleting table:', deleteError);
-            throw deleteError;
-        }
-
-        console.log('Table deleted:', deleteResult);
-
-        // Create a new table
-        const { data: createResult, error: createError } = await supabase
-            .rpc('create_table', { table_name: tableName });
-
-        if (createError) {
-            console.error('Error creating table:', createError);
-            throw createError;
-        }
-
-        console.log('Table created:', createResult);
-    } else {
-        // Table doesn't exist, create it
-        const { data: createResult, error: createError } = await supabase
-            .rpc('create_table', { table_name: tableName });
-
-        if (createError) {
-            console.error('Error creating table:', createError);
-            throw createError;
-        }
-
-        console.log('Table created:', createResult);
-    }
-}
 
 
 
@@ -249,44 +198,55 @@ async function getAllPathsAndCheckTableExistence() {
 
 
 
-async function CreateTable() {
-    const tableName = 'TmpJobsPosting';
-    const newTableName = 'jobsfromtelegram';
-
+export async function CopyAndDelete2() {
+    // Set up the database connection
+    const supabase = createClient(
+      'https://your-project-url.supabase.co',
+      'your-supabase-key'
+    );
+    // Define the table names
+    const tableName = 'jobsfromtelegram';
+    const oldTableName = 'OldJobPosting';
+  
     try {
-        // Step 1: Create a new table with the same structure as JobsPosting
-        const createResult = await supabase.rpc('create_table_like', {
-            new_table_name: tableName,
-            source_table_name: newTableName,
-        });
-
-        // Return a message or any other information based on your needs
-        return {
-            success: true,
-            message: 'Table recreated successfully.',
-        };
+      // Step 1: Copy data to the new table
+      // Select the columns to copy from the original table
+      const { data: selectedRows, error: selectError } = await supabase
+        .from(tableName)
+        .select('Company, JobDesc, City, Link, Date');
+      if (selectError) {
+        throw selectError;
+      }
+      // Insert the selected rows into the new table
+      const { error: insertError } = await supabase
+        .from(oldTableName)
+        .insert(selectedRows);
+      if (insertError) {
+        throw insertError;
+      }
+      // Select all rows from the new table
+      const { data: copiedRows, error: selectAllError } = await supabase
+        .from(oldTableName)
+        .select('*');
+      if (selectAllError) {
+        throw selectAllError;
+      }
+      // Delete the copied rows from the original table
+      const { error: deleteError } = await supabase.from(tableName).delete();
+      if (deleteError) {
+        throw deleteError;
+      }
+  
+      // Return a message or any other information based on your needs
+      return {
+        success: true,
+        message: 'Data copied to OldJobPosting and deleted from jobsfromtelegram.',
+      };
     } catch (error) {
-        console.error('Error recreating table:', error);
-        throw error;
-    }
-}
-
-
-async function CreateTable2() {
-    const { data, error } = await supabase.from('jobsfromtelegram').select('*')
-    if (error) return console.log('Error fetching posts:', error.message)
-  
-    if (data.length === 0) {
-      const { error } = await supabase.from('jobsfromtelegram').create({
-        id: 'serial primary key',
-        title: 'text not null',
-        body: 'text not null',
-        embedding: 'vector(384)'
-      })
-      if (error) return console.log('Error creating posts table:', error.message)
-  
-      console.log('Posts table created successfully!')
-    } else {
-      console.log('Posts table already exists.')
+      console.error('Error executing query:', error);
+      throw error;
+    } finally {
+      // Destroy the database connection
+      await supabase.disconnect();
     }
   }
