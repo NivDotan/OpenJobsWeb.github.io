@@ -1,26 +1,40 @@
 from telethon import TelegramClient, events
 from datetime import datetime
-from ConnetionToPsql import insert_into_jobs_table
+from ConnetionToPsql import InsertTOTableMain, connectionTODB
 from MessageParser import parse_messages
 from telethon.tl.types import Message, PeerChannel, MessageMediaWebPage, WebPagePending, MessageEntityBold, MessageEntityTextUrl, MessageEntityHashtag
 from telethon.tl import types
 import traceback
+import os
+from os.path import join, dirname
+from dotenv import load_dotenv
+
+
+
+
 
 async def Connection(api_id, api_hash):
     client = TelegramClient('Test1', api_id, api_hash)
     return client
 
 async def main():
-    api_id = 9676030
-    api_hash = '868b631e0ef16c82f0a07d15a334fd50'
-    channel_username = "HiTech_Jobs_In_Israel"
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    dotenv_path = join(dirname(__file__), '.env')
+    load_dotenv(dotenv_path)
+    api_id = os.environ.get("api_id")
+    api_hash = os.environ.get("api_hash")
+    channel_username = os.environ.get("channel_username")
+
+    #api_id = 9676030
+    #api_hash = '868b631e0ef16c82f0a07d15a334fd50'
+    #channel_username = "HiTech_Jobs_In_Israel"
     try:
         client = await Connection(api_id, api_hash)
         await client.start()
         print("Client connected.")
         
         today = datetime.now().date()
-        yesterday_date = datetime(2024, 2, 27).date()
+        yesterday_date = datetime(2024, 3, 8).date()
         today = yesterday_date
         # Get messages from the last 24 hours
         messages = []
@@ -29,12 +43,13 @@ async def main():
                 messages.append(message)
             elif message.date.date() < today:
                 break
-
+        print(f"Inserting {len(messages)} records.")
+        conn = connectionTODB()
         for message in messages:
             DictionaryOfValues = parse_messages(message.text, today)
             if not(DictionaryOfValues is None):
-                insert_into_jobs_table(values = DictionaryOfValues)
-
+                InsertTOTableMain(conn, DictionaryOfValues)
+        print(f"Finished Inserting {len(messages)} records.")
     except Exception as e:
         print("Had An Error, ", e, ", ", traceback.print_exc())
 

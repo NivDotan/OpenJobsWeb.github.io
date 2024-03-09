@@ -4,17 +4,21 @@ import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import FilterButton from './FilterButton';
 import DeleteButton from './DeleteAndCopyButton';
+import AllJobsPosting from './AllJobsPostingButton.js';
+import {selectAllFromTable, CopyAndDelete ,GetStudentJuniorTAAndHaifa, CopyAndDelete2} from './ServerFunctions.js'
+const { createClient } = require('@supabase/supabase-js')
 
 const MyComponent = () => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-
+  const [currentData, setCurrentData] = useState([]);
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3001');
-        
-        setData(response.data);
+        const response = await selectAllFromTable();
+        setData(response);
+        setCurrentData(response); // Set currentData initially to all jobs
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -23,10 +27,24 @@ const MyComponent = () => {
     fetchData();
   }, []); // Run only once on component mount
 
+    const handleAllJobsPostingButtonClick = async () => {
+      try {
+        await setCurrentData([]);
+        const response = await selectAllFromTable();
+        setData(response);
+        setCurrentData(response);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+
   const handleFilterButtonClick = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/GetStudentJuniorTAAndHaifa');
-      setFilteredData(response.data);
+      await setCurrentData([]);
+      const response = await GetStudentJuniorTAAndHaifa();
+      setFilteredData(response);
+      setCurrentData(response);
     } catch (error) {
       console.error('Error fetching filtered data:', error);
     }
@@ -34,16 +52,20 @@ const MyComponent = () => {
 
   const handleDeleteButtonClick = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/DeleteAndContinue');
-      setFilteredData(response.data);
+      await setCurrentData([]);
+      const response = await CopyAndDelete();
+      response = await selectAllFromTable();
+      setFilteredData(response);
+      setCurrentData(response);
     } catch (error) {
       console.error('Error fetching filtered data:', error);
     }
   };
-
+  
   return (
     <div className="modern-container">
       <div className="button-container">
+        <AllJobsPosting onClick={handleAllJobsPostingButtonClick} />
         <FilterButton onClick={handleFilterButtonClick} />
         <DeleteButton onClick={handleDeleteButtonClick} />
       </div>
@@ -58,27 +80,28 @@ const MyComponent = () => {
             <Th>Link</Th>
           </Tr>
         </Thead>
-          <Tbody>
-          {(filteredData.length > 0 ? filteredData : data).length > 0 ? (
-            (filteredData.length > 0 ? filteredData : data).map((item) => (
-              <Tr key={item.key}>
-                <Td>{item.Company}</Td>
-                <Td>{item.JobDesc}</Td>
-                <Td>{item.City}</Td>
-                <Td>{item.Date}</Td>
-                <Td>
-                  <a href={item.Link} target="_blank" rel="noopener noreferrer">
-                    Link
-                  </a>
-                </Td>
+        <Tbody>
+            {currentData.length > 0 ? (
+              currentData.map((item) => (
+                <Tr key={item.key}>
+                  <Td>{item.Company}</Td>
+                  <Td>{item.JobDesc}</Td>
+                  <Td>{item.City}</Td>
+                  <Td>{item.Date}</Td>
+                  <Td>
+                    <a href={item.Link} target="_blank" rel="noopener noreferrer">
+                      Link
+                    </a>
+                  </Td>
+                </Tr>
+              ))
+            ) : (
+              <Tr>
+                <Td colSpan="5">No data available</Td>
               </Tr>
-            ))
-          ) : (
-            <Tr>
-              <Td colSpan="5">No data available</Td>
-            </Tr>
-          )}
-        </Tbody>
+            )}
+          </Tbody>
+
       </Table>
     </div>
     </div>
