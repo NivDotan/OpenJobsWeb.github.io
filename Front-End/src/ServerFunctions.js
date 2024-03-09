@@ -58,18 +58,15 @@ export async function getCitiesFromDatabase(tableName) {
     }
 }
 
-export async function GetStudentJuniorTAAndHaifa(tableName) {
+export async function GetStudentJuniorTAAndHaifa() {
     try {
         // Fetch rows from Supabase table with the specified conditions
+        const tableName = 'jobsfromtelegram';
         const { data, error } = await supabase
         .from(tableName)
         .select('*')
-        .or("City.ilike.%Haifa%")
-        .or("JobDesc.ilike.%Junior%,JobDesc.ilike.%student%, JobDesc.ilike.%Student%, JobDesc.ilike.%junior%,\
-        and(City.ilike.%Haifa%)");
-            //and((or(City.ilike.%Haifa%), or(City.ilike.%haifa%), or(City.ilike.%Tel%), or(City.ilike.%TEL%), or(City.ilike.%HQ%), or(City.ilike.%IL%), \
-            //    or(City.ilike.%Israel%), or(City.ilike.%Yokneam%), or(City.ilike.%tel%)))");
-        
+        .or('JobDesc.ilike.%Junior%,JobDesc.ilike.%Student%')
+        .or('City.ilike.%Tel%,City.ilike.%Haifa%,City.ilike.%HQ%,City.ilike.%IL%,City.ilike.%Israel%,City.ilike.%Yokneam%');
 
         if (error) {
             console.error('Error executing query:', error);
@@ -147,9 +144,17 @@ export async function CopyAndDelete() {
 export async function GetStudentJuniorTAAndHaifaJSON() {
     try {
         const CheckIfExistTheTable = await getAllPathsAndCheckTableExistence();
-        
         const tableName = 'jobsfromtelegram';
         const rows = await GetStudentJuniorTAAndHaifa(tableName);
+        //Delete the table and create a new table
+        //if (CheckIfExistTheTable){
+        //    recreateTable();
+        //}
+        ////Only create a new table
+        //else{
+        //    CreateTable2();
+        //}
+        
         return rows;
     } catch (error) {
         console.error('Error:', error);
@@ -228,8 +233,8 @@ async function getAllPathsAndCheckTableExistence() {
             });
 
             // Check if the table "TmpJobs" exists
-            const tableExists = paths['/TmpJobs'] !== undefined;
-            console.log(`Table "TmpJobs" exists: ${tableExists}`);
+            const tableExists = paths['/TmpJobsPosting'] !== undefined;
+            console.log(`Table "TmpJobsPosting" exists: ${tableExists}`);
             return tableExists;
             //return Object.keys(paths);
         } else {
@@ -241,3 +246,47 @@ async function getAllPathsAndCheckTableExistence() {
         return [];
     }
 }
+
+
+
+async function CreateTable() {
+    const tableName = 'TmpJobsPosting';
+    const newTableName = 'jobsfromtelegram';
+
+    try {
+        // Step 1: Create a new table with the same structure as JobsPosting
+        const createResult = await supabase.rpc('create_table_like', {
+            new_table_name: tableName,
+            source_table_name: newTableName,
+        });
+
+        // Return a message or any other information based on your needs
+        return {
+            success: true,
+            message: 'Table recreated successfully.',
+        };
+    } catch (error) {
+        console.error('Error recreating table:', error);
+        throw error;
+    }
+}
+
+
+async function CreateTable2() {
+    const { data, error } = await supabase.from('jobsfromtelegram').select('*')
+    if (error) return console.log('Error fetching posts:', error.message)
+  
+    if (data.length === 0) {
+      const { error } = await supabase.from('jobsfromtelegram').create({
+        id: 'serial primary key',
+        title: 'text not null',
+        body: 'text not null',
+        embedding: 'vector(384)'
+      })
+      if (error) return console.log('Error creating posts table:', error.message)
+  
+      console.log('Posts table created successfully!')
+    } else {
+      console.log('Posts table already exists.')
+    }
+  }

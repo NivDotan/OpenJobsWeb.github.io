@@ -20,7 +20,7 @@ async def main():
         print("Client connected.")
         
         today = datetime.now().date()
-        yesterday_date = datetime(2024, 3, 7).date()
+        yesterday_date = datetime(2024, 3, 8).date()
         today = yesterday_date
         # Get messages from the last 24 hours
         messages = []
