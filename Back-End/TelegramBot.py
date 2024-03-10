@@ -25,16 +25,13 @@ async def main():
     api_hash = os.environ.get("api_hash")
     channel_username = os.environ.get("channel_username")
 
-    #api_id = 9676030
-    #api_hash = '868b631e0ef16c82f0a07d15a334fd50'
-    #channel_username = "HiTech_Jobs_In_Israel"
     try:
         client = await Connection(api_id, api_hash)
         await client.start()
         print("Client connected.")
         
         today = datetime.now().date()
-        yesterday_date = datetime(2024, 3, 8).date()
+        yesterday_date = datetime(2024, 3, 9).date()
         today = yesterday_date
         # Get messages from the last 24 hours
         messages = []

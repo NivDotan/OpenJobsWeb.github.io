@@ -9,8 +9,6 @@ def connectionTODB():
     load_dotenv(dotenv_path)
     supabase_url = os.environ.get("supabaseUrl")
     supabase_key = os.environ.get("supabaseKey")
-    #supabase_url = "https://opnfoozwkdnolacljfbo.supabase.co"
-    #supabase_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9wbmZvb3p3a2Rub2xhY2xqZmJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk1NjUzNjUsImV4cCI6MjAyNTE0MTM2NX0.D7pAw1ZVlZ9bkC_16HSHkrL5MinsPHPFTaaj9uV1cwI"
     conn = supabase.create_client(supabase_url, supabase_key)
     
     return conn
