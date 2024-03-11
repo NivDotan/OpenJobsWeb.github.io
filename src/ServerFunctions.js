@@ -1,9 +1,10 @@
 import { createClient } from '@supabase/supabase-js';
 
 
-
-const supabaseUrl = await process.env.REACT_APP_API_URL;
-const supabaseKey = process.env.REACT_APP_API_KEY;
+REACT_APP_API_URL="https://opnfoozwkdnolacljfbo.supabase.co"
+REACT_APP_API_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9wbmZvb3p3a2Rub2xhY2xqZmJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk1NjUzNjUsImV4cCI6MjAyNTE0MTM2NX0.D7pAw1ZVlZ9bkC_16HSHkrL5MinsPHPFTaaj9uV1cwI"
+//const supabaseUrl = await process.env.REACT_APP_API_URL;
+//const supabaseKey = process.env.REACT_APP_API_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 function convertDateFormat(originalDate) {
