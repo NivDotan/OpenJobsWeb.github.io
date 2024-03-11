@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/OpenJobsWeb.github.io/static/css/main.e24e3ecf.css",
+    "main.js": "/OpenJobsWeb.github.io/static/js/main.bef1701b.js",
+    "static/js/952.c730f37f.chunk.js": "/OpenJobsWeb.github.io/static/js/952.c730f37f.chunk.js",
+    "static/js/453.d855a71b.chunk.js": "/OpenJobsWeb.github.io/static/js/453.d855a71b.chunk.js",
+    "index.html": "/OpenJobsWeb.github.io/index.html",
+    "main.e24e3ecf.css.map": "/OpenJobsWeb.github.io/static/css/main.e24e3ecf.css.map",
+    "main.bef1701b.js.map": "/OpenJobsWeb.github.io/static/js/main.bef1701b.js.map",
+    "952.c730f37f.chunk.js.map": "/OpenJobsWeb.github.io/static/js/952.c730f37f.chunk.js.map",
+    "453.d855a71b.chunk.js.map": "/OpenJobsWeb.github.io/static/js/453.d855a71b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e24e3ecf.css",
+    "static/js/main.bef1701b.js"
+  ]
+}
