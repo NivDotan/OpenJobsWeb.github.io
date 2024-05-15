@@ -96,8 +96,7 @@ export async function CopyAndDelete() {
         // Step 1: Copy data to the new table
         const { data: selectedRows, error: selectError } = await supabase
             .from(tableName)
-            .select('Company', 'JobDesc', 'City', 'Link', 'Date');
-
+            .select('Company, JobDesc, City, Link, Date');
         if (selectError) {
             console.error('Error fetching data:', selectError);
             throw selectError;
