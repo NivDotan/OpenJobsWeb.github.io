@@ -102,7 +102,7 @@ export async function CopyAndDelete() {
             console.error('Error fetching data:', selectError);
             throw selectError;
         }
-        debug.print("Try");
+        
         const { data: insertResult, error: insertError } = await supabase
             .from(oldTableName)
             //.upsert(selectedRows);
