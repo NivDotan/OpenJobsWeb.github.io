@@ -87,7 +87,7 @@ export async function GetStudentJuniorTAAndHaifa() {
         throw error;
     }
 }
-
+// It's copying the data from the original table and then deleting the data from the original table.
 export async function CopyAndDelete() {
     const tableName = 'jobsfromtelegram';
     const oldTableName = 'OldJobPosting';
@@ -105,7 +105,8 @@ export async function CopyAndDelete() {
 
         const { data: insertResult, error: insertError } = await supabase
             .from(oldTableName)
-            .upsert(selectedRows);
+            //.upsert(selectedRows);
+            .insert(selectedRows);
 
         if (insertError) {
             console.error('Error inserting into OldJobPosting:', insertError);
