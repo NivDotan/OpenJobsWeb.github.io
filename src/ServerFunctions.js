@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
-
-
+import Swal from 'sweetalert2';
+//
 const supabaseUrl="https://opnfoozwkdnolacljfbo.supabase.co"
 const supabaseKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9wbmZvb3p3a2Rub2xhY2xqZmJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk1NjUzNjUsImV4cCI6MjAyNTE0MTM2NX0.D7pAw1ZVlZ9bkC_16HSHkrL5MinsPHPFTaaj9uV1cwI"
 //const supabaseUrl = await process.env.REACT_APP_API_URL;
@@ -14,6 +14,8 @@ function convertDateFormat(originalDate) {
     const year = date.getFullYear().toString().slice(2);
     return `${day}/${month}/${year}`;
 }
+
+
 
 export async function selectAllFromTable() {
     try {
@@ -194,6 +196,26 @@ async function getAllPathsAndCheckTableExistence() {
     }
 }
 
+
+
+export async function validatePassword(password){
+    try {
+        const { data, error } = await supabase
+            .from('PASS')
+            .select()
+            .eq('PASS', password)
+            .single();
+
+        if (error || !data) {
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        console.error('Error validating password:', error);
+        return false;
+    }
+}
 
 
 export async function CopyAndDelete2() {
