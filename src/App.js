@@ -6,8 +6,10 @@ import FilterButton from './FilterButton';
 import DeleteButton from './DeleteAndCopyButton';
 import AllJobsPosting from './AllJobsPostingButton.js';
 import Swal from 'sweetalert2';
+import './App.css'; // Import the CSS file
 import {selectAllFromTable, CopyAndDelete ,GetStudentJuniorTAAndHaifa, CopyAndDelete2, validatePassword} from './ServerFunctions.js'
 const { createClient } = require('@supabase/supabase-js')
+
 
 const MyComponent = () => {
   const [data, setData] = useState([]);
@@ -120,8 +122,13 @@ async function handlePasswordValidated(){
   };
 
   const handleFilterChange = (event) => {
-    setFilter(event.target.value);
-    filterData(event.target.value, companyFilter, jobDescFilter, cityFilter, dateFilter);
+    const { value } = event.target;
+  setFilter(value);
+  if (value.toLowerCase() === '') {
+    setCurrentData(data); // Show all data if 'All' is selected
+  } else {
+    filterData(value, companyFilter, jobDescFilter, cityFilter, dateFilter);
+  }
   };
 
   
@@ -171,13 +178,14 @@ async function handlePasswordValidated(){
           placeholder="Search for jobs..."
         />
       </div>
-    <div className="table-container">
-      <Table className="">
+    <div className="table-container filterable-table">
+      <Table>
         <Thead>
           <Tr>
           <Th>
                 <select name="company" value={companyFilter} onChange={(e) => handleFilterChange(e, setCompanyFilter)}>
                   <option value="">Company</option>
+                  <option value="">All</option> {}
                   {getUniqueValues('Company').map((company, index) => (
                     <option key={index} value={company}>{company}</option>
                   ))}
@@ -188,11 +196,47 @@ async function handlePasswordValidated(){
             <Th>
                 <select name="date" value={dateFilter} onChange={(e) => handleFilterChange(e, setDateFilter)}>
                   <option value="">Date</option>
+                  <option value="">All</option> {}
                   {getUniqueValues('Date').map((date, index) => (
                     <option key={index} value={date}>{date}</option>
                   ))}
                 </select>
               </Th>
+            <Th>Link</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+            {currentData.length > 0 ? (
+              currentData.map((item) => (
+                <Tr key={item.key}>
+                  <Td>{item.Company}</Td>
+                  <Td>{item.JobDesc}</Td>
+                  <Td>{item.City}</Td>
+                  <Td>{item.Date}</Td>
+                  <Td>
+                    <a href={item.Link} target="_blank" rel="noopener noreferrer">
+                      Link
+                    </a>
+                  </Td>
+                </Tr>
+              ))
+            ) : (
+              <Tr>
+                <Td colSpan="5">No data available</Td>
+              </Tr>
+            )}
+          </Tbody>
+
+      </Table>
+    </div>
+    <div className="table-container regular-table">
+      <Table>
+        <Thead>
+          <Tr>
+            <Th>Company</Th>
+            <Th>Job Description</Th>
+            <Th>City</Th>
+            <Th>Date</Th>
             <Th>Link</Th>
           </Tr>
         </Thead>
