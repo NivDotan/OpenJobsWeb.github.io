@@ -110,9 +110,20 @@ async function handlePasswordValidated(){
     setDateFilter('');
   };
 
-  const handleFilterChange = (event) => {
+  const handleFilterChangeFilterBox = (event) => {
     const { value } = event.target;
   setFilter(value);
+  if (value.toLowerCase() === '') {
+    setCurrentData(data); // Show all data if 'All' is selected
+  } else {
+    filterData(value, companyFilter, jobDescFilter, cityFilter, dateFilter);
+  }
+  };
+
+
+  const handleFilterChange = (event) => {
+    const { value } = event.target;
+  //setFilter(value);
   if (value.toLowerCase() === '') {
     setCurrentData(data); // Show all data if 'All' is selected
   } else {
@@ -163,7 +174,7 @@ async function handlePasswordValidated(){
         <input
           type="text"
           value={filter}
-          onChange={handleFilterChange}
+          onChange={handleFilterChangeFilterBox}
           placeholder="Search for jobs..."
         />
       </div>
