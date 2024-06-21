@@ -7,7 +7,7 @@ import DeleteButton from './components/DeleteAndCopyButton.js';
 import AllJobsPosting from './components/AllJobsPostingButton.js';
 import Swal from 'sweetalert2';
 import './App.css'; // Import the CSS file
-import {selectAllFromTable, CopyAndDelete ,GetStudentJuniorTAAndHaifa, CopyAndDelete2, validatePassword} from './api/ServerFunctions.js'
+import {selectAllFromTable, CopyAndDelete ,GetStudentJuniorTAAndHaifa, CopyAndDelete2, validatePassword, getDistinctDate} from './api/ServerFunctions.js'
 const { createClient } = require('@supabase/supabase-js')
 
 
@@ -66,6 +66,7 @@ const MyComponent = () => {
 
 
   const handleDeleteButtonClick = () => {
+    getDistinctDate();
     Swal.fire({
         title: 'Enter Password',
         input: 'password',
@@ -123,7 +124,6 @@ async function handlePasswordValidated(){
 
   const handleFilterChange = (event) => {
     const { value } = event.target;
-  //setFilter(value);
   if (value.toLowerCase() === '') {
     setCurrentData(data); // Show all data if 'All' is selected
   } else {
@@ -183,7 +183,7 @@ async function handlePasswordValidated(){
         <Thead>
           <Tr>
           <Th>
-                <select name="company" value={companyFilter} onChange={(e) => handleFilterChange(e, setCompanyFilter)}>
+                <select name="company" value={companyFilter} onChange={(e) => handleFilterChange(e, setCompanyFilter)} >
                   <option value="">Company</option>
                   <option value="">All</option> {}
                   {getUniqueValues('Company').map((company, index) => (

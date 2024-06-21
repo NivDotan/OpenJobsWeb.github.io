@@ -270,3 +270,46 @@ export async function CopyAndDelete2() {
       await supabase.disconnect();
     }
   }
+
+
+export async function selectDateFromTable() {
+    try {
+        // Fetch rows from Supabase table
+        const { data, error } = await supabase
+            .from('jobsfromtelegram')
+            .select('Date');
+
+        if (error) {
+            console.error('Error fetching data:', error);
+            throw error;
+        }
+
+        // Convert date format in each row
+        const formattedRows = data.map(row => ({
+            ...row,
+            Date: convertDateFormat(row.Date),
+        }));
+
+        return formattedRows;
+    } catch (error) {
+        console.error('Error executing query:', error);
+        throw error;
+    }
+}
+
+export const getDistinctDate = async () => {
+    try {
+        //const { data1, error1 } = await supabase.rpc('echo', { say: '👋' })  
+        const { data, error } = await supabase
+        .rpc('get_distinct_dates');
+        console.log(data);
+      if (error) {
+        throw error;
+      }
+  
+      return data;
+    } catch (error) {
+      console.error('Error fetching distinct values:', error);
+      return [];
+    }
+  };
