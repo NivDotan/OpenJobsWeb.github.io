@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
-import FilterButton from './FilterButton';
-import DeleteButton from './DeleteAndCopyButton';
-import AllJobsPosting from './AllJobsPostingButton.js';
+import FilterButton from './components/FilterButton.js';
+import DeleteButton from './components/DeleteAndCopyButton.js';
+import AllJobsPosting from './components/AllJobsPostingButton.js';
 import Swal from 'sweetalert2';
 import './App.css'; // Import the CSS file
-import {selectAllFromTable, CopyAndDelete ,GetStudentJuniorTAAndHaifa, CopyAndDelete2, validatePassword} from './ServerFunctions.js'
+import {selectAllFromTable, CopyAndDelete ,GetStudentJuniorTAAndHaifa, CopyAndDelete2, validatePassword} from './api/ServerFunctions.js'
 const { createClient } = require('@supabase/supabase-js')
 
 
@@ -64,17 +64,6 @@ const MyComponent = () => {
     }
   };
 
-  //const handleDeleteButtonClick = async () => {
-  //  try {
-  //    await setCurrentData([]);
-  //    const response = await CopyAndDelete();
-  //    response = await selectAllFromTable();
-  //    setFilteredData(response);
-  //    setCurrentData(response);
-  //  } catch (error) {
-  //    console.error('Error fetching filtered data:', error);
-  //  }
-  //};
 
   const handleDeleteButtonClick = () => {
     Swal.fire({
