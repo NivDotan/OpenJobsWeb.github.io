@@ -297,7 +297,7 @@ export async function selectDateFromTable() {
     }
 }
 
-export const getDistinctDate = async () => {
+export async function getDistinctDate(){
     try {
         //const { data1, error1 } = await supabase.rpc('echo', { say: '👋' })  
         const { data, error } = await supabase
@@ -313,3 +313,63 @@ export const getDistinctDate = async () => {
       return [];
     }
   };
+
+
+
+export async function CopyAndDeleteByDate(date) {
+    const tableName = 'jobsfromtelegram';
+    const oldTableName = 'OldJobPosting';
+    
+
+    try {
+        // Step 1: Copy data to the new table
+        const { data: selectedRows, error: selectError } = await supabase
+            .from(tableName)
+            .select('Company, JobDesc, City, Link, Date')
+            .eq('Date', date);
+        if (selectError) {
+            console.error('Error fetching data:', selectError);
+            throw selectError;
+        }
+        console.log(selectedRows);
+        const { data: insertResult, error: insertError } = await supabase
+            .from(oldTableName)
+            //.upsert(selectedRows);
+            .insert(selectedRows);
+
+        if (insertError) {
+            console.error('Error inserting into OldJobPosting:', insertError);
+            throw insertError;
+        }
+
+        const { data: copiedRows, error: copyError } = await supabase
+            .from(oldTableName)
+            .select('*');
+
+        if (copyError) {
+            console.error('Error fetching copied data:', copyError);
+            throw copyError;
+        }
+
+        // Step 2: Delete data from the original table
+        const { data: deleteResult, error: deleteError } = await supabase
+            .from(tableName)
+            .delete()
+            .eq('Date', date);
+
+        if (deleteError) {
+            console.error('Error deleting data from jobsfromtelegram:', deleteError);
+            throw deleteError;
+        }
+
+        // Return a message or any other information based on your needs
+        return {
+            success: true,
+            message: 'Data copied to OldJobPosting and deleted from jobsfromtelegram.',
+        };
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+}
+

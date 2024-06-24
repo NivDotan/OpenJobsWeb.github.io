@@ -7,7 +7,7 @@ import DeleteButton from './components/DeleteAndCopyButton.js';
 import AllJobsPosting from './components/AllJobsPostingButton.js';
 import Swal from 'sweetalert2';
 import './App.css'; // Import the CSS file
-import {selectAllFromTable, CopyAndDelete ,GetStudentJuniorTAAndHaifa, CopyAndDelete2, validatePassword, getDistinctDate} from './api/ServerFunctions.js'
+import {selectAllFromTable, CopyAndDelete ,GetStudentJuniorTAAndHaifa, CopyAndDelete2, validatePassword, getDistinctDate,CopyAndDeleteByDate} from './api/ServerFunctions.js'
 const { createClient } = require('@supabase/supabase-js')
 
 
@@ -20,6 +20,7 @@ const MyComponent = () => {
   const [jobDescFilter, setJobDescFilter] = useState('');
   const [cityFilter, setCityFilter] = useState('');
   const [dateFilter, setDateFilter] = useState('');
+  const [distinctDates, setDistinctDates] = useState([]);
   const [dropdownsVisible, setDropdownsVisible] = useState({
     company: false,
     jobDesc: false,
@@ -55,6 +56,7 @@ const MyComponent = () => {
 
   const handleFilterButtonClick = async () => {
     try {
+
       await setCurrentData([]);
       const response = await GetStudentJuniorTAAndHaifa();
       setFilteredData(response);
@@ -77,24 +79,66 @@ const MyComponent = () => {
         confirmButtonText: 'Submit',
         showLoaderOnConfirm: true,
         preConfirm: async (password) => {
-            console.log(password)
+            
             const isValid = await validatePassword(password);
     
             if (!isValid) {
                 Swal.showValidationMessage('Incorrect password!');
             } else {
-                await handlePasswordValidated();
+                //await handlePasswordValidated();
+                //distinctDates = getDistinctDates(),
+                await showDateSelectionDialog();
             }
         },
         allowOutsideClick: () => !Swal.isLoading()
     });
 };
 
-async function handlePasswordValidated(){
+
+const getDistinctDates = () => {
+  const dates = [...new Set(data.map(item => item.Date))];
+  setDistinctDates(dates);
+};
+
+const showDateSelectionDialog = async () => {
+  const distinctDates = await getDistinctDate();
+  console.log('Distinct dates:', distinctDates);
+  const { value: selectedDates } = await Swal.fire({
+    title: 'Select Dates to Delete',
+    html: `
+      <div id="date-selection-container">
+        ${distinctDates.map(dateObj => `
+          <div>
+            <input type="checkbox" id="${dateObj.Date}" name="dates" value="${dateObj.Date}">
+            <label for="${dateObj.Date}">${dateObj.Date}</label>
+          </div>
+        `).join('')}
+      </div>
+    `,
+    focusConfirm: false,
+    showCancelButton: true,
+    preConfirm: () => {
+      const selectedDates = Array.from(document.querySelectorAll('input[name="dates"]:checked'))
+        .map(checkbox => checkbox.value);
+      return selectedDates.length ? selectedDates : Swal.showValidationMessage('You need to select at least one date');
+    }
+  });
+  console.log('Selected dates:', selectedDates); 
+  if (selectedDates) { // Check if selectedDates and selectedDates.value exist
+    for (let i = 0, len = selectedDates.length; i < len; i++) {
+      console.log('Selected dates:',i,' ', selectedDates[i]); 
+      await CopyAndDeleteByDate(selectedDates[i]);
+    }
+    handleDateDeletion();
+  }
+};
+
+
+async function handleDateDeletion(){
   try {
       await setCurrentData([]);
-      const response = await CopyAndDelete();
-      response = await selectAllFromTable();
+      //const response = await CopyAndDelete();
+      const response = await selectAllFromTable();
       setFilteredData(response);
       setCurrentData(response);
       Swal.fire('Success', 'Data copied and deleted successfully', 'success');
