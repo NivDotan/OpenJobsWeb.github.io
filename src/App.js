@@ -130,9 +130,37 @@ const showDateSelectionDialog = async () => {
       await CopyAndDeleteByDate(selectedDates[i]);
     }
     handleDateDeletion();
+
+
+    // Show loading spinner
+    //Swal.fire({
+    //  title: 'Processing...',
+    //  text: 'Please wait while we process your request',
+    //  allowOutsideClick: false,
+    //  didOpen: () => {
+    //    Swal.showLoading();
+    //  }
+    //});
+
+    //// Simulate a function that processes the selected dates
+    //// Replace this with your actual processing function
+    //await processDates(selectedDates);
+
+    //// Close the loading spinner and show success message
+    //Swal.close();
+    //Swal.fire('Success', 'Data copied and deleted successfully', 'success');
   }
 };
 
+// Simulated function to process dates
+const processDates = async (dates) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log('Processing dates:', dates);
+      resolve();
+    }, 2000); // Simulate a 2 second processing time
+  });
+};
 
 async function handleDateDeletion(){
   try {
