@@ -315,7 +315,6 @@ export async function getDistinctDate(){
   };
 
 
-
 export async function CopyAndDeleteByDate(date) {
     const tableName = 'jobsfromtelegram';
     const oldTableName = 'OldJobPosting';
@@ -373,3 +372,26 @@ export async function CopyAndDeleteByDate(date) {
     }
 }
 
+export async function get_ip() {
+    try {
+        // Use a third-party API to get the IP address
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        const ipAddress = data.ip;
+
+        // Insert the IP address into the database
+        const { data: insertResult, error: insertError } = await supabase
+            .from('IPAddress')
+            .insert({IP_address: ipAddress});
+//
+        //if (insertError) {
+        //    console.error('Error inserting IP address:', insertError);
+        //    throw insertError;
+        //}
+
+        //console.log('IP address inserted:', ipAddress);
+    } catch (error) {
+        console.error('Error fetching or inserting IP address:', error);
+        throw error;
+    }
+}
