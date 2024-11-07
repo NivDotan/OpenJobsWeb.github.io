@@ -14,14 +14,14 @@ const CustomButton = styled(Button)({
   },
 });
 
-const AllJobsPosting = ({ onClick }) => {
+const ScraperListingsFilterButton = ({ onClick }) => {
   return (
     <Stack direction="row" spacing={2}>
       <CustomButton variant="contained" onClick={onClick}>
-        All Jobs
+        Most Updated jobs
       </CustomButton>
     </Stack>
   );
 };
 
-export default AllJobsPosting;
+export default ScraperListingsFilterButton;
