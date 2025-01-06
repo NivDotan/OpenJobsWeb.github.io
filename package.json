@@ -1,5 +1,5 @@
 {
-  "homepage": "https://nivdotan.github.io/OpenJobsWeb.github.io/",
+  "homepage": "https://nivdotan.github.io/InternQuest/",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
@@ -8,7 +8,7 @@
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^6.1.5",
     "@mui/material": "^6.1.5",
-    "@supabase/supabase-js": "^2.39.7",
+    "@supabase/supabase-js": "^2.47.10",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",

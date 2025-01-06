@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 //const { createClient } = require('@supabase/supabase-js')
 import '../App.css'; // Import the CSS file
-import {getDistinctDate2, GetStudentJuniorTAAndHaifa2,validatePassword2, validatePassword,CopyAndDeleteByDate,triggerCopyAndDeleteByDate, get_ip,selectAllFromTable2} from '../api/ServerFunctions.js'
+import {getDistinctDate2, GetStudentJuniorTAAndHaifa2,CopyAndDeleteByDate,triggerCopyAndDeleteByDate, get_ip,selectAllFromTable2} from '../api/ServerFunctions.js'
 import ScraperListings from '../Analytics/Analytics.js';
 
 const MyComponent = () => {
@@ -89,16 +89,33 @@ const MyComponent = () => {
           showLoaderOnConfirm: true,
           preConfirm: async (password) => {
               
-              const isValid = await validatePassword(password);
-      
-              if (!isValid) {
-                  Swal.showValidationMessage('Incorrect password!');
-              } else {
-                  //await handlePasswordValidated();
-                  //distinctDates = getDistinctDates(),
-                  await showDateSelectionDialog();
-              }
-          },
+            const email = 'nivdotan123@gmail.com'; // You should get this from the user input or session
+            console.log('See:', JSON.stringify({ email, password }));
+            try {
+                // Send POST request to the Vercel API route to validate the password
+                const response = await fetch('https://vercel-serverless-functions3.vercel.app/api/validatePassword', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                    body: JSON.stringify({ password }),//, password }),
+                });
+                console.log('Data:', response);
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    Swal.showValidationMessage(data.error || 'Something went wrong!');
+                    return false;
+                }
+    
+                // Handle success, for example, show date selection dialog
+                await showDateSelectionDialog();
+            } 
+            catch (error) {
+                console.error('Error during authentication:', error);
+                Swal.showValidationMessage('Network error! Please try again.');
+            }
+        },
           allowOutsideClick: () => !Swal.isLoading()
       });
   };

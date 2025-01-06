@@ -11,27 +11,13 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/OpenJobsWeb.github.io" element={<MyComponent />} />
-        <Route path="/OpenJobsWeb.github.io/analytics" element={<ScraperListings />} />
+        <Route path="/InternQuest" element={<MyComponent />} />
+        <Route path="/InternQuest/analytics" element={<ScraperListings />} />
       </Routes>
     </Router>
   );
 };
 
-
-/* <Router>
-<div className="app-container">
-<Routes>
-  <Route path="/" element={<MyComponent />} />
-  <Route path="/analytics" element={<Analytics />} />
-</Routes>
-</div>
-</Router> 
-
-
-<div className="app-container">
-        <MyComponent />
-      </div>*/
 
 export default App;
 
