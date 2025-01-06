@@ -11,8 +11,8 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/InternQuest" element={<MyComponent />} />
-        <Route path="/InternQuest/analytics" element={<ScraperListings />} />
+        <Route path="/OpenJobsWeb.github.io" element={<MyComponent />} />
+        <Route path="/OpenJobsWeb.github.io/analytics" element={<ScraperListings />} />
       </Routes>
     </Router>
   );
