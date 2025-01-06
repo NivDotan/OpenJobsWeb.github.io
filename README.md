@@ -1,11 +1,11 @@
-# OpenJobsWeb.github.io
+# InternQuest
 
-OpenJobsWeb is a web application designed for job seekers to explore, filter, and apply for jobs efficiently. Built with modern web technologies, the platform fetches job listings from an API and displays them dynamically with user-friendly filters and a responsive layout.
+InternQuest is a web application designed for job seekers to explore, filter, and apply for jobs efficiently. Built with modern web technologies, the platform fetches job listings from an API and displays them dynamically with user-friendly filters and a responsive layout.
 
-## Live Demo
+## Live Website
 
 You can explore the live project here:  
-[OpenJobsWeb Demo](https://nivdotan.github.io/OpenJobsWeb.github.io/)
+[InternQuest](https://nivdotan.github.io/OpenJobsWeb.github.io/)
 
 ## Features
 
