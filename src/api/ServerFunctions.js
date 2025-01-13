@@ -10,7 +10,18 @@ function convertDateFormat(originalDate) {
 
 export async function selectAllFromTable2() {
   try {
-    const response = await fetch('https://vercel-serverless-functions3.vercel.app/api/getData'); // Replace with your actual Vercel URL
+    const payload = { Table: 'jobsfromtelegram', 
+      startId: 0};
+
+    //const response = await fetch('https://vercel-serverless-functions3.vercel.app/api/getData'); 
+    const response = await fetch('https://vercel-serverless-functions3.vercel.app/api/GetJobsMainFunction', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      //jobsfromtelegram
+      body: JSON.stringify(payload),
+    }); 
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
@@ -29,7 +40,19 @@ export async function selectAllFromTable2() {
 
 export async function GetStudentJuniorTAAndHaifa2() {
   try {
-    const response = await fetch('https://vercel-serverless-functions3.vercel.app/api/GetStudentJuniorTAAndHaifa'); // Replace with your actual Vercel URL
+    //const response = await fetch('https://vercel-serverless-functions3.vercel.app/api/GetStudentJuniorTAAndHaifa'); // Replace with your actual Vercel URL
+    const payload = { Table: 'FilterStudentJuniorTAAndHaifa', 
+      startId: 0};
+      
+      const response = await fetch('https://vercel-serverless-functions3.vercel.app/api/GetJobsMainFunction', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      //jobsfromtelegram
+      body: JSON.stringify(payload),
+    }); 
+    
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }

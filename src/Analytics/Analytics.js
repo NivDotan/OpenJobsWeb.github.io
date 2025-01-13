@@ -45,7 +45,19 @@ const ScraperListings = () => {
     const fetchJobs = async () => {
       setLoading(true);
       try {
-        const response = await fetch('https://vercel-serverless-functions3.vercel.app/api/fetchScraperJobs');
+        //const response = await fetch('https://vercel-serverless-functions3.vercel.app/api/fetchScraperJobs');
+        const payload = { Table: 'scrapers_data', 
+          startId: 0};
+          
+          const response = await fetch('https://vercel-serverless-functions3.vercel.app/api/GetJobsMainFunction', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          //jobsfromtelegram
+          body: JSON.stringify(payload),
+        }); 
+
         if (!response.ok) {
           throw new Error('Failed to fetch jobs');
         }
